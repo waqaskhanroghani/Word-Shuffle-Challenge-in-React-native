@@ -10,6 +10,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Routes from './src/navigation/Routes';
 import {ExpenseProvider} from './src/context/ExpenseContext';
 import Home from './src/screens/home';
+import Guess from './src/screens/guess';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -18,10 +19,17 @@ export default function App() {
       <NavigationContainer>
         <PaperProvider>
           <ExpenseProvider>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName={Routes.HOME}>
               <Stack.Screen
-                name={Routes.TABNAVIGATOR}
+                name={Routes.HOME}
                 component={Home}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Routes.GUESS}
+                component={Guess}
                 options={{
                   headerShown: false,
                 }}

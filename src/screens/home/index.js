@@ -1,120 +1,56 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import Tts from 'react-native-tts';
-import shuffle from 'lodash.shuffle';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {Button} from 'react-native-paper';
+import Routes from '../../navigation/Routes';
 
-const words = [
-  'APPLE',
-  'APRICOT',
-  'AVOCADO',
-  'ALMOND',
-  'ARTICHOKE',
-  'ASPARAGUS',
-  'AMARANTH',
-  'ARUGULA',
-  'ACAI',
-  'ANCHOVY',
-  'BANANA',
-  'BLACKBERRY',
-  'BLUEBERRY',
-  'BOYSENBERRY',
-  'BING CHERRY',
-  'BROCCOLI',
-  'BRUSSELS SPROUTS',
-  'BUTTERNUT SQUASH',
-  'BEETROOT',
-  'BOK CHOY',
-  'ORANGE',
-  'OLIVE',
-  'OYSTER',
-  'OKRA',
-  'ONION',
-  'OCTOPUS',
-  'OYSTER MUSHROOM',
-  'ORZO',
-  'OCTOPUS',
-  'ORANGE BELL PEPPER',
-  'STRAWBERRY',
-  'SPINACH',
-  'SWISS CHARD',
-  'SWEET POTATO',
-  'SUGAR SNAP PEAS',
-  'SALMON',
-  'SHRIMP',
-  'SCALLOP',
-  'SOYBEAN',
-  'SQUASH',
-  'BLUEBERRY',
-  'BLACKBERRY',
-  'BOYSENBERRY',
-  'BING CHERRY',
-  'BUTTERNUT SQUASH',
-  'BROCCOLI',
-  'BRUSSELS SPROUTS',
-  'BOK CHOY',
-  'BEETROOT',
-  'BANANA',
-];
+const Home = ({navigation}) => {
+  const handleGuessWordPress = () => {
+    // Navigate to Guess the Word screen
+    navigation.navigate(Routes.GUESS);
+  };
 
-const initialWord = shuffle(words)[0];
-const initialLetters = shuffle(initialWord.split(''));
+  const handleScoreboardPress = () => {
+    // Navigate to Scoreboard screen
+    navigation.navigate('Scoreboard');
+  };
 
-const WordifyGame = () => {
-  const [selectedWord, setSelectedWord] = useState(initialWord);
-  const [shuffledLetters, setShuffledLetters] = useState(initialLetters);
-  const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    Tts.speak(selectedWord);
-  }, [selectedWord]);
-
-  const handleLetterPress = letter => {
-    const index = shuffledLetters.indexOf(letter);
-    if (index !== -1) {
-      const newLetters = [...shuffledLetters];
-      newLetters.splice(index, 1);
-      setShuffledLetters(newLetters);
-      if (newLetters.length === 0) {
-        const guessedWord = selectedWord
-          .split('')
-          .filter(char => !newLetters.includes(char))
-          .join('');
-        if (guessedWord.toUpperCase() === selectedWord.toUpperCase()) {
-          Alert.alert(
-            'Congratulations!',
-            'You guessed the word correctly!',
-            [{text: 'OK', onPress: () => setScore(score + 1)}],
-            {cancelable: false},
-          );
-        } else {
-          Alert.alert(
-            'Sorry!',
-            'You guessed wrong. Keep going, you will make it!',
-            [{text: 'OK'}],
-            {cancelable: false},
-          );
-        }
-        const newWord = shuffle(words.filter(word => word !== selectedWord))[0];
-        setSelectedWord(newWord);
-        setShuffledLetters(shuffle(newWord.split('')));
-      }
-    }
+  const handleAboutUsPress = () => {
+    // Navigate to About Us screen
+    navigation.navigate('AboutUs');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.score}>Score: {score}</Text>
-      <View style={styles.wordContainer}>
-        {shuffledLetters &&
-          shuffledLetters.map((letter, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => handleLetterPress(letter)}>
-              <Text style={styles.letter}>{letter}</Text>
-            </TouchableOpacity>
-          ))}
+      <View style={styles.content}>
+        <Text style={styles.title}>Word Shuffle Challenge</Text>
+        {/* Add any additional content here */}
       </View>
-      <Text style={styles.wordToGuess}>{selectedWord}</Text>
+      <View style={styles.buttonsContainer}>
+        <Button
+          mode="contained"
+          buttonColor="black"
+          style={styles.button}
+          onPress={handleGuessWordPress}
+          labelStyle={styles.buttonText}>
+          Guess the Word
+        </Button>
+        <Button
+          mode="contained"
+          buttonColor="black"
+          style={styles.button}
+          onPress={handleScoreboardPress}
+          labelStyle={styles.buttonText}>
+          Scoreboard
+        </Button>
+        <Button
+          mode="contained"
+          buttonColor="black"
+          style={styles.button}
+          onPress={handleAboutUsPress}
+          labelStyle={styles.buttonText}>
+          About Us
+        </Button>
+      </View>
     </View>
   );
 };
@@ -124,29 +60,34 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF', // Set background color to white
   },
-  score: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  wordContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  content: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
+    color: 'black', // Set text color to black
   },
-  letter: {
-    fontSize: 30,
-    margin: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 5,
+  buttonsContainer: {
+    width: '80%', // Adjust width as needed
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  wordToGuess: {
-    fontSize: 30,
+  button: {
+    width: '100%', // Make button full width
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: 'white', // Set text color to white
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });
 
-export default WordifyGame;
+export default Home;
