@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import {Button} from 'react-native-paper';
 import Routes from '../../navigation/Routes';
 
@@ -46,7 +46,9 @@ const Home = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      style={styles.container}
+      source={require('../../Assets/images/bg3.png')}>
       <View style={styles.content}>
         <Text style={styles.title}>Word Shuffle Challenge</Text>
         <Text style={styles.quote}>{quote}</Text>
@@ -74,7 +76,7 @@ const Home = ({navigation}) => {
           About Us
         </Button>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
