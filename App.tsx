@@ -8,7 +8,7 @@ import TabNavigation from './src/navigation/TabNavigation';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Routes from './src/navigation/Routes';
-import {ExpenseProvider} from './src/context/ExpenseContext';
+import {ScoreProvider} from './src/context/ScoreContext';
 import Home from './src/screens/home';
 import Guess from './src/screens/guess';
 import Scoreboard from './src/screens/Scoreboard';
@@ -20,7 +20,7 @@ export default function App() {
     <SafeAreaView style={{flex: 1}}>
       <NavigationContainer>
         <PaperProvider>
-          <ExpenseProvider>
+          <ScoreProvider>
             <Stack.Navigator initialRouteName={Routes.HOME}>
               <Stack.Screen
                 name={Routes.HOME}
@@ -51,7 +51,7 @@ export default function App() {
                 }}
               />
             </Stack.Navigator>
-          </ExpenseProvider>
+          </ScoreProvider>
         </PaperProvider>
       </NavigationContainer>
     </SafeAreaView>

@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'; // Import Ionicons fr
 import Tts from 'react-native-tts';
 import shuffle from 'lodash.shuffle';
 import Routes from '../../navigation/Routes';
+import {useScoreContext} from '../../context/ScoreContext';
 
 const words = [
   'APPLE',
@@ -65,6 +66,7 @@ const Guess = ({navigation}) => {
   const [selectedWord, setSelectedWord] = useState(initialWord);
   const [shuffledLetters, setShuffledLetters] = useState(initialLetters);
   const [score, setScore] = useState(0);
+  const {score: contextScore, updateScore} = useScoreContext();
 
   useEffect(() => {
     Tts.speak(selectedWord);
@@ -82,8 +84,8 @@ const Guess = ({navigation}) => {
           .filter(char => !newLetters.includes(char))
           .join('');
         if (guessedWord.toUpperCase() === selectedWord.toUpperCase()) {
-          // Increment score only when word is guessed correctly
-          setScore(score + 1);
+          // Increment context score only when word is guessed correctly
+          updateScore(contextScore + 1);
         }
         const newWord = shuffle(words.filter(word => word !== selectedWord))[0];
         setSelectedWord(newWord);
@@ -102,7 +104,9 @@ const Guess = ({navigation}) => {
       <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.score}>Score: {score}</Text>
+      {/* <Text style={styles.score}>Score: {score}</Text> */}
+      <Text style={styles.score}>Score: {contextScore}</Text>
+
       <View style={styles.wordContainer}>
         {shuffledLetters &&
           shuffledLetters.map((letter, index) => (
