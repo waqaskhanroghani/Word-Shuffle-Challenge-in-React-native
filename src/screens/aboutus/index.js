@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Linking} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+  ImageBackground,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Import Ionicons from Expo vector icons library
 
 const AboutUs = ({navigation}) => {
@@ -14,66 +21,70 @@ const AboutUs = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Back button */}
-      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-      {/* Title */}
-      <Text style={styles.title}>About Us</Text>
-      {/* Description */}
-      <Text style={styles.description}>
-        Welcome to Word Shuffle Challenge, a fun and addictive game designed to
-        test your word knowledge and puzzle-solving skills! In this game, you'll
-        be presented with a scrambled word, and your task is to rearrange the
-        letters to guess the correct word. With each correct guess, you earn
-        points and climb up the scoreboard. Challenge yourself and see how many
-        words you can guess correctly!
-      </Text>
-      {/* Additional Content */}
-      <Text style={styles.additionalContent}>
-        - Features:
-        {'\n'}- Intuitive user interface
-        {'\n'}- Hundreds of challenging words
-        {'\n'}- Scoreboard to track your progress
-        {'\n'}- Enjoyable for all ages
-      </Text>
-      {/* Social Icons */}
-      <View style={styles.socialIconsContainer}>
-        <TouchableOpacity
-          onPress={() => handleSocialIconPress('https://www.facebook.com')}>
-          <Ionicons
-            name="logo-facebook"
-            size={30}
-            color="black"
-            style={styles.socialIcon}
-          />
+    <ImageBackground
+      style={styles.container}
+      source={require('../../Assets/images/bg3.png')}>
+      <View style={styles.container}>
+        {/* Back button */}
+        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+          <Ionicons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleSocialIconPress('mailto:contact@example.com')}>
-          <Ionicons
-            name="mail-outline"
-            size={30}
-            color="black"
-            style={styles.socialIcon}
-          />
-        </TouchableOpacity>
-        {/* Add more social icons and links as needed */}
+        {/* Title */}
+        <Text style={styles.title}>About Us</Text>
+        {/* Description */}
+        <Text style={styles.description}>
+          Welcome to Word Shuffle Challenge, a fun and addictive game designed
+          to test your word knowledge and puzzle-solving skills! In this game,
+          you'll be presented with a scrambled word, and your task is to
+          rearrange the letters to guess the correct word. With each correct
+          guess, you earn points and climb up the scoreboard. Challenge yourself
+          and see how many words you can guess correctly!
+        </Text>
+        {/* Additional Content */}
+        <Text style={styles.additionalContent}>
+          - Features:
+          {'\n'}- Intuitive user interface
+          {'\n'}- Hundreds of challenging words
+          {'\n'}- Scoreboard to track your progress
+          {'\n'}- Enjoyable for all ages
+        </Text>
+        {/* Social Icons */}
+        <View style={styles.socialIconsContainer}>
+          <TouchableOpacity
+            onPress={() => handleSocialIconPress('https://www.facebook.com')}>
+            <Ionicons
+              name="logo-facebook"
+              size={30}
+              color="black"
+              style={styles.socialIcon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleSocialIconPress('mailto:contact@example.com')}>
+            <Ionicons
+              name="mail-outline"
+              size={30}
+              color="black"
+              style={styles.socialIcon}
+            />
+          </TouchableOpacity>
+          {/* Add more social icons and links as needed */}
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // Set background color to white
+    // backgroundColor: '#FFFFFF', // Set background color to white
     paddingHorizontal: 20,
-    paddingTop: 40,
+    // paddingTop: 40,
   },
   backButton: {
     position: 'absolute',
-    top: 40,
+    top: 30,
     left: 20,
     zIndex: 1,
   },
@@ -81,8 +92,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: 'black', // Set text color to black
+    color: 'white', // Set text color to black
     textAlign: 'center',
+    marginTop: 30,
   },
   description: {
     fontSize: 16,
@@ -90,6 +102,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'black', // Set text color to black
     textAlign: 'center',
+    marginTop: 50,
   },
   additionalContent: {
     fontSize: 16,

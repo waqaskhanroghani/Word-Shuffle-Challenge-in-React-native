@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Scoreboard = ({navigation}) => {
@@ -32,30 +38,34 @@ const Scoreboard = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Back button */}
-      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-      {/* Trophy icon for highest score */}
-      <Ionicons
-        name="trophy"
-        size={80}
-        color="gold"
-        style={styles.trophyIcon}
-      />
-      {/* Highest score */}
-      <Text style={styles.scoreText}>Highest Score: {highestScore}</Text>
-      {/* Quote */}
-      <Text style={styles.quote}>{quote}</Text>
-    </View>
+    <ImageBackground
+      style={styles.container}
+      source={require('../../Assets/images/bg3.png')}>
+      <View style={styles.container}>
+        {/* Back button */}
+        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+          <Ionicons name="arrow-back" size={28} color="white" />
+        </TouchableOpacity>
+        {/* Trophy icon for highest score */}
+        <Ionicons
+          name="trophy"
+          size={80}
+          color="gold"
+          style={styles.trophyIcon}
+        />
+        {/* Highest score */}
+        <Text style={styles.scoreText}>Highest Score: {highestScore}</Text>
+        {/* Quote */}
+        <Text style={styles.quote}>{quote}</Text>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: '#FFFFFF',
     paddingHorizontal: 20,
     paddingTop: 40,
     justifyContent: 'center',
@@ -63,7 +73,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    top: 40,
+    top: 0,
     left: 20,
     zIndex: 1,
   },

@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Import Ionicons from Expo vector icons library
 import Tts from 'react-native-tts';
 import shuffle from 'lodash.shuffle';
@@ -100,25 +106,29 @@ const Guess = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-      {/* <Text style={styles.score}>Score: {score}</Text> */}
-      <Text style={styles.score}>Score: {contextScore}</Text>
+    <ImageBackground
+      style={styles.container}
+      source={require('../../Assets/images/bg3.png')}>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+          <Ionicons name="arrow-back" size={24} color="white" />
+        </TouchableOpacity>
+        {/* <Text style={styles.score}>Score: {score}</Text> */}
+        <Text style={styles.score}>Score: {contextScore}</Text>
 
-      <View style={styles.wordContainer}>
-        {shuffledLetters &&
-          shuffledLetters.map((letter, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => handleLetterPress(letter)}>
-              <Text style={styles.letter}>{letter}</Text>
-            </TouchableOpacity>
-          ))}
+        <View style={styles.wordContainer}>
+          {shuffledLetters &&
+            shuffledLetters.map((letter, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleLetterPress(letter)}>
+                <Text style={styles.letter}>{letter}</Text>
+              </TouchableOpacity>
+            ))}
+        </View>
+        <Text style={styles.wordToGuess}>{selectedWord}</Text>
       </View>
-      <Text style={styles.wordToGuess}>{selectedWord}</Text>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -127,7 +137,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white', // Set background color to white
   },
   backButton: {
     position: 'absolute',
