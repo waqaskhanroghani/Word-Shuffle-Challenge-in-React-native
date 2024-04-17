@@ -11,6 +11,8 @@ import Routes from './src/navigation/Routes';
 import {ExpenseProvider} from './src/context/ExpenseContext';
 import Home from './src/screens/home';
 import Guess from './src/screens/guess';
+import Scoreboard from './src/screens/Scoreboard';
+import Aboutus from './src/screens/aboutus';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -30,6 +32,20 @@ export default function App() {
               <Stack.Screen
                 name={Routes.GUESS}
                 component={Guess}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Routes.SCOREBOARD}
+                component={Scoreboard}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Routes.ABOUTUS}
+                component={Aboutus}
                 options={{
                   headerShown: false,
                 }}
