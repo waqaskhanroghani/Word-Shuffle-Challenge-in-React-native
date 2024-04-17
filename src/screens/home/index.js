@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import {Button} from 'react-native-paper';
 import Routes from '../../navigation/Routes';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Home = ({navigation}) => {
   const [quote, setQuote] = useState('');
@@ -50,6 +51,12 @@ const Home = ({navigation}) => {
       style={styles.container}
       source={require('../../Assets/images/bg3.png')}>
       <View style={styles.content}>
+        <Ionicons
+          name="library"
+          size={80}
+          color="gold"
+          style={styles.trophyIcon}
+        />
         <Text style={styles.title}>Word Shuffle Challenge</Text>
         <Text style={styles.quote}>{quote}</Text>
       </View>
@@ -120,6 +127,9 @@ const styles = StyleSheet.create({
     color: 'white', // Set text color to white
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  trophyIcon: {
+    marginBottom: 20,
   },
 });
 
