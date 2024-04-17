@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons'; // Import Ionicons from Expo vector icons library
 import Tts from 'react-native-tts';
 import shuffle from 'lodash.shuffle';
+import Routes from '../../navigation/Routes';
 
 const words = [
   'APPLE',
@@ -59,7 +61,7 @@ const words = [
 const initialWord = shuffle(words)[0];
 const initialLetters = shuffle(initialWord.split(''));
 
-const Guess = () => {
+const Guess = ({navigation}) => {
   const [selectedWord, setSelectedWord] = useState(initialWord);
   const [shuffledLetters, setShuffledLetters] = useState(initialLetters);
   const [score, setScore] = useState(0);
@@ -90,8 +92,16 @@ const Guess = () => {
     }
   };
 
+  // Function to handle back button press
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+        <Ionicons name="arrow-back" size={24} color="black" />
+      </TouchableOpacity>
       <Text style={styles.score}>Score: {score}</Text>
       <View style={styles.wordContainer}>
         {shuffledLetters &&
@@ -114,6 +124,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white', // Set background color to white
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 1,
   },
   score: {
     fontSize: 20,
