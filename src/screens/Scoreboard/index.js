@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons'; // Import Ionicons from Expo vector icons library
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Scoreboard = ({navigation}) => {
-  // Dummy scores
-  const scores = [
-    {player: 'Player 1', score: 100},
-    {player: 'Player 2', score: 90},
-    {player: 'Player 3', score: 80},
-    {player: 'Player 4', score: 70},
-    {player: 'Player 5', score: 60},
-  ];
+  // State to store the fetched quote
+  const [quote, setQuote] = useState('');
+  // State to store the highest score (dummy data for now)
+  const [highestScore, setHighestScore] = useState(500);
+
+  // Function to fetch random quote
+  const fetchRandomQuote = async () => {
+    try {
+      // Fetch random quote from API
+      const response = await fetch('https://api.quotable.io/random');
+      const data = await response.json();
+      // Update the quote state
+      setQuote(data.content);
+    } catch (error) {
+      console.error('Error fetching random quote:', error);
+    }
+  };
+
+  // Fetch random quote on component mount
+  useEffect(() => {
+    fetchRandomQuote();
+  }, []);
 
   // Function to handle back button press
   const handleBackPress = () => {
@@ -23,17 +37,17 @@ const Scoreboard = ({navigation}) => {
       <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      {/* Title */}
-      <Text style={styles.title}>Score History</Text>
-      {/* Scores */}
-      <View style={styles.scoresContainer}>
-        {scores.map((item, index) => (
-          <View key={index} style={styles.scoreItem}>
-            <Text style={styles.playerName}>{item.player}</Text>
-            <Text style={styles.score}>{item.score}</Text>
-          </View>
-        ))}
-      </View>
+      {/* Trophy icon for highest score */}
+      <Ionicons
+        name="trophy"
+        size={80}
+        color="gold"
+        style={styles.trophyIcon}
+      />
+      {/* Highest score */}
+      <Text style={styles.scoreText}>Highest Score: {highestScore}</Text>
+      {/* Quote */}
+      <Text style={styles.quote}>{quote}</Text>
     </View>
   );
 };
@@ -41,9 +55,11 @@ const Scoreboard = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // Set background color to white
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 20,
     paddingTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   backButton: {
     position: 'absolute',
@@ -51,36 +67,20 @@ const styles = StyleSheet.create({
     left: 20,
     zIndex: 1,
   },
-  title: {
+  trophyIcon: {
+    marginBottom: 20,
+  },
+  scoreText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: 'black', // Set text color to black
+    color: 'black',
+  },
+  quote: {
+    fontSize: 20,
+    fontStyle: 'italic',
     textAlign: 'center',
-  },
-  scoresContainer: {
-    flex: 1,
-  },
-  scoreItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-    paddingVertical: 10,
-    backgroundColor: '#f0f0f0', // Set background color for score item
-    borderRadius: 5,
-  },
-  playerName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black', // Set text color to black
-    marginLeft: 20,
-  },
-  score: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black', // Set text color to black
-    marginRight: 20,
+    color: 'black',
   },
 });
 
