@@ -6,6 +6,11 @@ Welcome to Word Shuffle Challenge, an open-source word puzzle game developed in 
 
 Word Shuffle Challenge is a fun and addictive word puzzle game where players are presented with a jumbled set of letters and must rearrange them to form meaningful words. With multiple levels of difficulty and a variety of words to guess, Word Shuffle Challenge offers a stimulating challenge for players of all ages.
 
+![WhatsApp Image 2024-05-13 at 12 31 49](https://github.com/waqaskhanroghani/Word-Shuffle-Challenge-in-React-native/assets/72159415/1a1a16bc-15e1-4ddd-956e-b9b8ea7c62f1)
+
+
+![WhatsApp Image 2024-05-13 at 12 31 49 (1)](https://github.com/waqaskhanroghani/Word-Shuffle-Challenge-in-React-native/assets/72159415/43001bca-7ba2-4e19-8a52-9a2a1f4c03d4)
+
 ## Features
 
 - Randomized letter shuffling for each word
