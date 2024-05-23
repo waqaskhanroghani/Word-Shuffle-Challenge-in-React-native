@@ -47,7 +47,3 @@ This project is licensed under the [MIT License](LICENSE), which means you are f
 ## Contact
 
 If you have any questions, suggestions, or feedback about Word Shuffle Challenge, feel free to reach out to us at [mwaqaskhanroghani@gmail.com](mailto:mwaqaskhanroghani@gmail.com).
-
----
-
-Please replace "your-username" with your GitHub username and customize the content as needed. Let me know if you need further assistance!
